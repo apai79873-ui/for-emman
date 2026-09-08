@@ -1,156 +1,349 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Letter for Emman 🤍</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Emman, With Love 🤍</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-        body {
-            margin: 0;
-            min-height: 100vh;
-            font-family: Georgia, serif;
-            background: #f7eee9;
-            color: #542f38;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 25px;
-        }
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  background: #fff7f8;
+  color: #4b3438;
+  line-height: 1.8;
+}
 
-        .letter {
-            width: 100%;
-            max-width: 650px;
-            background: #fffaf7;
-            padding: 45px 35px;
-            border-radius: 8px;
-            box-shadow: 0 15px 45px rgba(90, 50, 55, 0.15);
-            border: 1px solid #ead8d2;
-        }
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+  background: linear-gradient(135deg, #fff7f8, #fcecef);
+}
 
-        .small {
-            text-align: center;
-            font-size: 13px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #a66b75;
-        }
+.cover h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
 
-        h1 {
-            text-align: center;
-            font-size: 42px;
-            font-weight: normal;
-            margin: 15px 0 30px;
-            color: #713b48;
-        }
+.cover p {
+  font-size: 18px;
+}
 
-        .heart {
-            text-align: center;
-            font-size: 35px;
-            margin-bottom: 20px;
-        }
+.envelope {
+  margin-top: 30px;
+  border: none;
+  background: #ffffff;
+  padding: 20px 30px;
+  border-radius: 50px;
+  font-size: 18px;
+  color: #7b4f58;
+  box-shadow: 0 8px 25px rgba(100, 60, 70, 0.15);
+  cursor: pointer;
+}
 
-        p {
-            font-size: 17px;
-            line-height: 1.9;
-            margin: 20px 0;
-        }
+.music {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 10;
+}
 
-        .closing {
-            margin-top: 35px;
-            font-style: italic;
-        }
+.music button {
+  border: none;
+  background: white;
+  padding: 10px 15px;
+  border-radius: 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+  cursor: pointer;
+}
 
-        .signature {
-            margin-top: 10px;
-            font-size: 20px;
-        }
+.letter {
+  display: none;
+  max-width: 850px;
+  margin: auto;
+  padding: 80px 25px;
+}
 
-        @media (max-width: 500px) {
-            .letter {
-                padding: 35px 25px;
-            }
+.letter h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 40px;
+}
 
-            h1 {
-                font-size: 34px;
-            }
+.letter p {
+  margin-bottom: 22px;
+  font-size: 17px;
+}
 
-            p {
-                font-size: 16px;
-            }
-        }
-    </style>
+.buttons {
+  text-align: center;
+  margin: 50px 0;
+}
+
+.buttons button {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  margin: 15px auto;
+  padding: 16px;
+  border: none;
+  border-radius: 30px;
+  background: #f4dfe3;
+  color: #5a3d43;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.hidden-message {
+  display: none;
+  text-align: center;
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  margin: 15px auto;
+  max-width: 600px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.mystery {
+  text-align: center;
+  margin: 60px 0;
+}
+
+.mystery-box {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 75px;
+  height: 75px;
+  border-radius: 20px;
+  background: #ead0d6;
+  font-size: 38px;
+  cursor: pointer;
+  box-shadow: 0 7px 20px rgba(0,0,0,0.12);
+}
+
+.final {
+  text-align: center;
+  padding: 70px 20px;
+  background: #fcecef;
+}
+
+.final h2 {
+  font-size: 30px;
+}
+
+.hearts {
+  position: fixed;
+  pointer-events: none;
+  font-size: 20px;
+  animation: float 6s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(100vh);
+  }
+  to {
+    transform: translateY(-10vh);
+  }
+}
+</style>
 </head>
 
 <body>
 
-    <main class="letter">
+<div class="music">
+  <button onclick="toggleMusic()" id="musicButton">
+    🎵 Play This Love
+  </button>
+</div>
 
-        <div class="heart">🤍</div>
+<audio id="musicAudio" loop>
+  <source src="This Love.mp3" type="audio/mpeg">
+</audio>
 
-        <p class="small">A little something for you</p>
+<section class="cover" id="cover">
+  <div>
+    <h1>For Emman, with love. 🤍</h1>
+    <p>A little something I made for you.</p>
 
-        <h1>For Emman</h1>
+    <button class="envelope" onclick="openLetter()">
+      💌 Open my letter
+    </button>
+  </div>
+</section>
 
-        <p>
-            Dear baby,
-        </p>
+<section class="letter" id="letter">
 
-        <p>
-            I don't always know how to put everything I feel into words,
-            so I made this little corner just for you.
-        </p>
+<h2>Hi, Emman. 🤍</h2>
 
-        <p>
-            I want you to know how much I appreciate you. Thank you for
-            accepting me as I am — even when I'm makulit, clingy,
-            overthinking, or simply being my weird self.
-        </p>
+<p>Hi, Emman. 🤍</p>
 
-        <p>
-            Thank you for making me feel comfortable enough to be the real
-            me around you. There's something so special about being with
-            someone who doesn't make you feel like you have to pretend.
-        </p>
+<p>I just really wanted to tell you this kasi minsan feeling ko hindi ko nasasabi enough kung gaano ako ka-thankful na ikaw yung dumating sa buhay ko.</p>
 
-        <p>
-            I appreciate the little things you do, the way you make me
-            feel cared for, and the moments that somehow make ordinary
-            days feel a little more special.
-        </p>
+<p>I love you so much, baby. Like, sobra. And honestly, I feel like one of the happiest women right now knowing na mahal mo ako and I get to love you back. Ang sarap sa feeling na may taong kagaya mo na kahit nakita mo na yung mga messy parts ko, yung insecurities ko, yung pagiging overthinker ko, yung mga times na ang hirap kong intindihin, you still choose me.</p>
 
-        <p>
-            I genuinely like you, baby. More than I probably know how to
-            explain sometimes. And I'm really grateful that somehow,
-            our paths crossed.
-        </p>
+<p>Thank you for never giving up on me, baby. Thank you for being patient with me kahit minsan pati ako hindi ko na maintindihan sarili ko. Thank you for reminding me that I am still worth loving kahit may mga araw na hindi ko feel yun about myself.</p>
 
-        <p>
-            I don't know exactly what the future will look like, but I
-            know that right now, I'm happy that I get to know you,
-            appreciate you, and make memories with you.
-        </p>
+<p>And I want you to know how incredibly proud I am of you. Proud ako sa lahat ng ginagawa mo, sa lahat ng pinagdaanan mo, and sa way na patuloy kang lumalaban kahit hindi naman laging madali ang buhay.</p>
 
-        <p>
-            So if there are days when you forget how much you mean to me,
-            I hope you come back to this little letter and remember:
-            <strong>you are appreciated, you are cared for, and you are
-            genuinely loved.</strong>
-        </p>
+<p>Pero one thing I admire the most about you is the way you love Jai. 🥹</p>
 
-        <p class="closing">
-            With all my love,
-        </p>
+<p>I want you to know na I love her too. Not just because she’s your daughter, but because she’s Jai. 🤍 I genuinely want to know her, understand her little world, and be someone she can be comfortable with. I know I’m still learning how to be part of her life, and I know I still have so much to learn, but I want to take my time and let our relationship grow naturally.</p>
 
-        <p class="signature">
-            Angel 🤍
-        </p>
+<p>I want to be there for her little milestones, her random stories, her kulit moments, and even the days when she just needs someone to listen to her. I want her to know na she has someone else who will always care for her and be proud of her.</p>
 
-    </main>
+<p>And honestly, baby, loving you made me realize na I’m not just falling in love with one person. I’m learning to love the little family that comes with you too. 🥹🤍</p>
+
+<p>I know hindi naman magiging perfect lahat. May mga araw na mapapagod tayo, magkakaroon ng misunderstandings, or may times na hindi natin maiintindihan isa’t isa. But I hope kahit sa mga ganung moments, we never forget na we’re on the same team.</p>
+
+<p>I don’t want to be there only when everything is easy and beautiful. Gusto kong kasama mo rin ako kapag pagod ka, kapag stressed ka, kapag hindi mo alam kung ano gagawin mo next. Gusto kong maging taong pwede mong uwian, kausapin, iyakan, or kahit tahimik lang na makasama.</p>
+
+<p>And I want you to know na you don’t have to be strong all the time with me. You can be soft. You can be tired. You can have bad days. You can be completely yourself, and I’ll still love you.</p>
+
+<p>I want to see every version of you, baby. Yung masaya ka, yung makulit ka, yung stubborn ka, yung pagod ka, yung soft ka, yung version mo ngayon, and even the version of you that you’re still becoming.</p>
+
+<p>I want to grow with you.</p>
+
+<p>I want to see your dreams come true. I want to celebrate your wins with you, and kapag may times na hindi mo nakikita yung worth mo, I’ll be there to remind you how amazing you are.</p>
+
+<p>I don’t know exactly what our future will look like, and I don’t want to rush anything. But if you ask me what kind of future I want, honestly, I’d want one where you’re there.</p>
+
+<p>Ikaw. Ako. Jai. 🤍</p>
+
+<p>Maybe someday, we’ll look back at this time in our lives and laugh at how young and unsure we were. Maybe we’ll remember all the little fights, the late-night conversations, the random laughs, the days we almost lost patience with each other, and all the moments that made us stronger.</p>
+
+<p>And I hope someday we can say, “Buti na lang, pinili natin isa’t isa.”</p>
+
+<p>Thank you for loving me in the purest way you know how. Thank you for accepting me, even the parts of me that I thought would make someone leave.</p>
+
+<p>I hope you know that I’m not only thankful that you’re my boyfriend. I’m thankful that I get to know the man behind the person I fell in love with. I’m thankful that I get to witness you as a father. And I’m thankful that somehow, I get to be part of your and Jai’s story.</p>
+
+<p>I love you, baby. And I love Jai. 🤍</p>
+
+<p>I’ll keep choosing you, not because I know everything about our future, but because every day I get to know you more, I realize more and more that you’re someone I want to keep choosing.</p>
+
+<p>Whatever version of life waits for us, I hope I get to experience it with you.</p>
+
+<p>And if someday that little future I imagine in my head becomes real…</p>
+
+<p>I hope it’s still you holding my hand, Jai somewhere beside us, and us looking at each other thinking,</p>
+
+<p><strong>“Grabe, we really made it.” 🤍</strong></p>
+
+<div class="buttons">
+
+<button onclick="showMessage('message1')">
+♡ Open this little message
+</button>
+
+<div class="hidden-message" id="message1">
+If you could see yourself through my eyes, baby, you'd understand why I love you the way I do. 🤍
+</div>
+
+<button onclick="showMessage('message2')">
+🥹 If you ever doubt us, tap this
+</button>
+
+<div class="hidden-message" id="message2">
+I don't need us to be perfect. I just want us to keep choosing each other, understanding each other, and finding our way back to each other. 🤍
+</div>
+
+</div>
+
+<div class="mystery">
+  <p>There’s one more little secret…</p>
+
+  <div class="mystery-box" onclick="showMessage('mysteryMessage')">
+    ?
+  </div>
+
+  <div class="hidden-message" id="mysteryMessage">
+    <strong>You found my little surprise. 🤍</strong>
+    <br><br>
+    And if someday that little future I imagine in my head becomes real…
+    <br><br>
+    I hope it’s still you holding my hand, Jai somewhere beside us, and us looking at each other thinking,
+    <br><br>
+    <strong>“Grabe, we really made it.” 🤍</strong>
+  </div>
+</div>
+
+</section>
+
+<section class="final">
+  <h2>Buti na lang, pinili natin isa’t isa. 🤍</h2>
+  <p>I love you both so much.</p>
+</section>
+
+<script>
+
+function openLetter() {
+  document.getElementById("cover").style.display = "none";
+  document.getElementById("letter").style.display = "block";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+  const audio = document.getElementById("musicAudio");
+
+  audio.play().catch(() => {});
+  document.getElementById("musicButton").innerHTML = "⏸ Pause This Love";
+}
+
+function toggleMusic() {
+  const audio = document.getElementById("musicAudio");
+  const button = document.getElementById("musicButton");
+
+  if (audio.paused) {
+    audio.play();
+    button.innerHTML = "⏸ Pause This Love";
+  } else {
+    audio.pause();
+    button.innerHTML = "🎵 Play This Love";
+  }
+}
+
+function showMessage(id) {
+  const message = document.getElementById(id);
+
+  if (message.style.display === "block") {
+    message.style.display = "none";
+  } else {
+    message.style.display = "block";
+  }
+}
+
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "hearts";
+  heart.innerHTML = "♡";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 8000);
+}
+
+setInterval(createHeart, 1800);
+
+</script>
 
 </body>
 </html>
